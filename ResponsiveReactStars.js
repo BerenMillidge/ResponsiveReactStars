@@ -24,7 +24,7 @@ export class ResponsiveReactStars extends React.Component{
 
 	handleResize(){
 		this.setState({
-			size: this.sizeFunc(this.props.size, window.innerWidth, window.innerHeight, this.maxSize);
+			size: this.sizeFunc(this.props.size, window.innerWidth, window.innerHeight, this.maxSize)
 		});
 	}
 
