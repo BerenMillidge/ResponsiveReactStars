@@ -3,7 +3,7 @@ import ReactStars from './ReactStars';
 
 function defaultGetSize(size, vw, vh,maxSize){
 	const proposedSize= vw/50;
-	if(size>=maxSize){
+	if(proposedSize>=maxSize){
 		return maxSize;
 	}
 	return proposedSize;
@@ -20,6 +20,8 @@ export class ResponsiveReactStars extends React.Component{
 		};
 		this.handleResize = this.handleResize.bind(this);
 		this.maxSize = props.maxSize || Number.MAX_SAFE_INTEGER;
+		console.log('MAX SIZE');
+		console.log(this.maxSize);
 	}
 
 	handleResize(){
