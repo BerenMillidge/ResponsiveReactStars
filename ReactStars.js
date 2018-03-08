@@ -69,6 +69,7 @@ class ReactStars extends Component {
   }
 
   componentWillReceiveProps(props) {
+    //console.log('react stars component receiving props');
     this.setState({
       stars: this.getStars(props.value),
       value: props.value,
@@ -117,7 +118,8 @@ class ReactStars extends Component {
       halfStar.at = index
     } else {
       index = index + 1
-    }
+    };
+    //console.log('react stars mouse over');
     this.setState({
       stars: this.getStars(index)
     })
@@ -137,12 +139,14 @@ class ReactStars extends Component {
       halfStar.hidden = !this.isDecimal(value)
       halfStar.at = Math.floor(this.state.value)
     }
+    //console.log('react stars mouse leave');
     this.setState({
       stars: this.getStars()
     })
   }
 
   clicked(event) {
+    //console.log('react stars clicked');
     const { config, halfStar } = this.state
     if (!config.edit) return
     let index = Number(event.target.getAttribute('data-index'))
@@ -186,27 +190,38 @@ class ReactStars extends Component {
         cursor: edit ? 'pointer' : 'default',
         fontSize: `${size}px`
       });
-      console.log('in react stars render function');
-      console.log(config.size);
-      return (
+      if(edit===true){
+        return (
+          <span
+            className={starClass}
+            style={style}
+            key={i}
+            data-index={i}
+            data-forhalf={char}
+            onMouseOver={this.mouseOver.bind(this)}
+            onMouseMove={this.mouseOver.bind(this)}
+            onMouseLeave={this.mouseLeave.bind(this)}
+            onClick={this.clicked.bind(this)}>
+            {char}
+          </span>
+      ) 
+      }else {
+          return (
         <span
           className={starClass}
           style={style}
           key={i}
           data-index={i}
-          data-forhalf={char}
-          onMouseOver={this.mouseOver.bind(this)}
-          onMouseMove={this.mouseOver.bind(this)}
-          onMouseLeave={this.mouseLeave.bind(this)}
-          onClick={this.clicked.bind(this)}>
+          data-forhalf={char}>
           {char}
         </span>
       )
+        }
+
     })
   }
 
   render() {
-
     const {
       className
     } = this.props
